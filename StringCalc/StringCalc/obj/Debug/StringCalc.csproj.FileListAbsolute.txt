@@ -1,0 +1,7 @@
+C:\Users\ckatz.ASTUTE\Desktop\Programming-Kata\StringCalc\StringCalc\bin\Debug\StringCalc.exe.config
+C:\Users\ckatz.ASTUTE\Desktop\Programming-Kata\StringCalc\StringCalc\bin\Debug\StringCalc.exe
+C:\Users\ckatz.ASTUTE\Desktop\Programming-Kata\StringCalc\StringCalc\bin\Debug\StringCalc.pdb
+C:\Users\ckatz.ASTUTE\Desktop\Programming-Kata\StringCalc\StringCalc\obj\Debug\StringCalc.csprojAssemblyReference.cache
+C:\Users\ckatz.ASTUTE\Desktop\Programming-Kata\StringCalc\StringCalc\obj\Debug\StringCalc.csproj.CoreCompileInputs.cache
+C:\Users\ckatz.ASTUTE\Desktop\Programming-Kata\StringCalc\StringCalc\obj\Debug\StringCalc.exe
+C:\Users\ckatz.ASTUTE\Desktop\Programming-Kata\StringCalc\StringCalc\obj\Debug\StringCalc.pdb
