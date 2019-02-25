@@ -13,8 +13,8 @@ namespace StringCalc
         {
             int sum = 0;
             bool res;
-            int a;
-            res = int.TryParse(numbers, out a);
+            //int a;
+            res = int.TryParse(numbers, out sum);
   
             if (string.IsNullOrEmpty(numbers))
             {
@@ -22,13 +22,20 @@ namespace StringCalc
             }
             else if (res)
             {
-                return sum + a;
+                return sum;
             }
             else
             {
-                var firstNum = Int32.Parse((numbers.Split(','))[0]);
-                var secondNum = Int32.Parse((numbers.Split(','))[1]);
-                sum = firstNum + secondNum;
+                string[] numArray = numbers.Split(',', '\n');
+                foreach(string num in numArray)
+                {
+                    res = int.TryParse(num, out int n);
+                    if (res)
+                    {
+                        sum += n;
+                    }
+                }
+
                 return sum;
             }
         }

@@ -52,5 +52,34 @@ namespace StringCalcTests
             var expected = 3;
             Assert.AreEqual(expected, result);
         }
+
+        [TestMethod]
+        public void Add_WhenUnknowAmountOfValues_ShouldReturnSumOfValues()
+        {
+            //------------Arrange-----------------
+            var input = "1,2,3";
+            var calculator = new StringCalculator();
+
+            //------------Act---------------------
+            var result = calculator.add(input);
+
+            //------------Assert-----------------
+            var expected = 6;
+            Assert.AreEqual(expected, result);
+        }
+        [TestMethod]
+        public void Add_WhenThereAreCommasAndNewLines_ShouldReturnSumOfValues()
+        {
+            //------------Arrange-----------------
+            var input = "5,\n";
+            var calculator = new StringCalculator();
+
+            //------------Act---------------------
+            var result = calculator.add(input);
+
+            //------------Assert-----------------
+            var expected = 5;
+            Assert.AreEqual(expected, result);
+        }
     }
 }
