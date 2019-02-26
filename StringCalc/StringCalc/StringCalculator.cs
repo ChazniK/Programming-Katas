@@ -9,12 +9,14 @@ namespace StringCalc
     public class StringCalculator
     {
 
+       
         public int add(string numbers)
         {
             int sum = 0;
             bool res;
             char delimiter;
             res = int.TryParse(numbers, out sum);
+            List<int> negativeNumbers = new List<int>();
   
             if (string.IsNullOrEmpty(numbers))
             {
@@ -22,7 +24,14 @@ namespace StringCalc
             }
             else if (res)
             {
-                return sum;
+                if (sum >= 0)
+                {
+                    return sum;
+                }
+                else
+                {
+                    throw new Exception("negatives not allowed: " + sum.ToString());
+                }
             }
             else
             {
@@ -30,31 +39,41 @@ namespace StringCalc
                 {
                     string[] delimeterNumber = numbers.Split('\n');
                     delimiter = delimeterNumber[0][2];
-                    string[] numArray = delimeterNumber[1].Split(',', '\n', delimiter);
+                    string[] numArray = delimeterNumber[1].Split(new char[] { ',', '\n', delimiter });
                     foreach (string num in numArray)
                     {
                         res = int.TryParse(num, out int n);
-                        if (res)
+                        if (res && n >= 0)
                         {
                             sum += n;
                         }
-
+                        else
+                        {
+                            negativeNumbers.Add(n);
+                        }
                     }
                 }
                 else
                 {
-                    string[] numArray = numbers.Split(',', '\n');
+                    string[] numArray = numbers.Split(new char[] { ',','\n' });
                     foreach (string num in numArray)
                     {
                         res = int.TryParse(num, out int n);
-                        if (res)
+                        if (res && n >= 0)
                         {
                             sum += n;
                         }
-                    }
+                        else
+                        {
+                            negativeNumbers.Add(n);
+                        }
+                    }            
                 }
-               
-
+                if (negativeNumbers.Count > 0)
+                {
+                    string negativeString = string.Join(",", negativeNumbers);
+                    throw new Exception("negatives not allowed: " + negativeString);
+                }
                 return sum;
             }
         }
