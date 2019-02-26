@@ -81,5 +81,20 @@ namespace StringCalcTests
             var expected = 5;
             Assert.AreEqual(expected, result);
         }
+
+        [TestMethod]
+        public void Add_WhenTheAreCustomDelimiters_ShouldReturnSumOfTheValues()
+        {
+            //------------Arrange-----------------
+            var input = "//;\n1;2";
+            var calculator = new StringCalculator();
+
+            //------------Act---------------------
+            var result = calculator.add(input);
+
+            //------------Assert-----------------
+            var expected = 3;
+            Assert.AreEqual(expected, result);
+        }
     }
 }

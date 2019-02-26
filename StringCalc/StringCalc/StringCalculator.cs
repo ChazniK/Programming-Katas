@@ -13,7 +13,7 @@ namespace StringCalc
         {
             int sum = 0;
             bool res;
-            //int a;
+            char delimiter;
             res = int.TryParse(numbers, out sum);
   
             if (string.IsNullOrEmpty(numbers))
@@ -26,15 +26,34 @@ namespace StringCalc
             }
             else
             {
-                string[] numArray = numbers.Split(',', '\n');
-                foreach(string num in numArray)
+                if (numbers[0].CompareTo('/') == 0 && numbers[1].CompareTo('/') == 0)
                 {
-                    res = int.TryParse(num, out int n);
-                    if (res)
+                    string[] delimeterNumber = numbers.Split('\n');
+                    delimiter = delimeterNumber[0][2];
+                    string[] numArray = delimeterNumber[1].Split(',', '\n', delimiter);
+                    foreach (string num in numArray)
                     {
-                        sum += n;
+                        res = int.TryParse(num, out int n);
+                        if (res)
+                        {
+                            sum += n;
+                        }
+
                     }
                 }
+                else
+                {
+                    string[] numArray = numbers.Split(',', '\n');
+                    foreach (string num in numArray)
+                    {
+                        res = int.TryParse(num, out int n);
+                        if (res)
+                        {
+                            sum += n;
+                        }
+                    }
+                }
+               
 
                 return sum;
             }
