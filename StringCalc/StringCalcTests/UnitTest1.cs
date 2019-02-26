@@ -58,21 +58,21 @@ namespace StringCalcTests
         public void Add_WhenUnknowAmountOfValues_ShouldReturnSumOfValues()
         {
             //------------Arrange-----------------
-            var input = "1,2,3,4";
+            var input = "1002,4";
             var calculator = new StringCalculator();
 
             //------------Act---------------------
             var result = calculator.add(input);
 
             //------------Assert-----------------
-            var expected = 10;
+            var expected = 4;
             Assert.AreEqual(expected, result);
         }
         [TestMethod]
         public void Add_WhenThereAreCommasAndNewLines_ShouldReturnSumOfValues()
         {
             //------------Arrange-----------------
-            var input = "1\n5\n\n4";
+            var input = "1\n5\n,\n4";
             var calculator = new StringCalculator();
 
             //------------Act---------------------

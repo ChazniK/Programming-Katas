@@ -8,74 +8,65 @@ namespace StringCalc
 {
     public class StringCalculator
     {
+        List<int> negativeNumbers = new List<int>();
+        List<int> numberList = new List<int>();
+        List<char> delimiterList = new List<char> { '\n', ',' };
 
-       
-        public int add(string numbers)
+        public int addNumbers(List<int> list)
         {
             int sum = 0;
-            bool res;
-            char delimiter;
-            res = int.TryParse(numbers, out sum);
-            List<int> negativeNumbers = new List<int>();
-  
-            if (string.IsNullOrEmpty(numbers))
+            foreach (int number in list)
+            {
+                sum += number;
+            }
+            return sum;
+        }
+        public string checkCustomDelim(string numberString)
+        {
+            if (numberString.Substring(0, 2).CompareTo("//") == 0)
+            {
+                string customPart = numberString.Split('\n')[0];
+                string numberPart = numberString.Split('\n')[1];
+                delimiterList.Add(customPart[2]);
+                return numberPart;
+            }
+            return numberString;
+
+        }
+        public int add(string numbersString)
+        {
+            if (string.IsNullOrEmpty(numbersString))
             {
                 return 0;
             }
-            else if (res)
+            else 
             {
-                if (sum >= 0)
+                string numbers = checkCustomDelim(numbersString);
+                string[] numberArrays = numbers.Split(delimiterList.ToArray());
+
+                foreach(string number in numberArrays)
                 {
-                    return sum;
-                }
-                else
-                {
-                    throw new Exception("negatives not allowed: " + sum.ToString());
-                }
-            }
-            else
-            {
-                if (numbers[0].CompareTo('/') == 0 && numbers[1].CompareTo('/') == 0)
-                {
-                    string[] delimeterNumber = numbers.Split('\n');
-                    delimiter = delimeterNumber[0][2];
-                    string[] numArray = delimeterNumber[1].Split(new char[] { ',', '\n', delimiter });
-                    foreach (string num in numArray)
+                    bool res = int.TryParse(number, out int num);
+                    if (res)
                     {
-                        res = int.TryParse(num, out int n);
-                        if (res && n >= 0)
+                        if (num <= 1000 && num >= 0 )
                         {
-                            sum += n;
+                            numberList.Add(num);
                         }
-                        else
+                        else if (num < 0)
                         {
-                            negativeNumbers.Add(n);
+                            negativeNumbers.Add(num);
                         }
                     }
                 }
-                else
-                {
-                    string[] numArray = numbers.Split(new char[] { ',','\n' });
-                    foreach (string num in numArray)
-                    {
-                        res = int.TryParse(num, out int n);
-                        if (res && n >= 0)
-                        {
-                            sum += n;
-                        }
-                        else
-                        {
-                            negativeNumbers.Add(n);
-                        }
-                    }            
-                }
                 if (negativeNumbers.Count > 0)
                 {
-                    string negativeString = string.Join(",", negativeNumbers);
-                    throw new Exception("negatives not allowed: " + negativeString);
+                    string negMessage = string.Join(",", negativeNumbers.ToArray());
+                    throw new Exception($"negatives not allowed: " + negMessage);
+          
                 }
-                return sum;
-            }
+                return addNumbers(numberList);
+            }     
         }
     }
 }
